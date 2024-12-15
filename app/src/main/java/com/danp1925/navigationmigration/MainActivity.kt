@@ -7,6 +7,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -35,6 +37,23 @@ class MainActivity : AppCompatActivity() {
                     toolbar.title = toolbarTitle
                 }
             }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                mainViewModel.events.collect{ event ->
+                    when(event){
+                        MainEvents.NavigateToSecondScreen -> navigateToSecondScreen()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun navigateToSecondScreen(){
+        supportFragmentManager.commit {
+            replace<SecondFragment>(R.id.fragment_container_view)
+            setReorderingAllowed(true)
+            addToBackStack("first")
         }
     }
 }
