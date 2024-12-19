@@ -23,11 +23,11 @@ class MainViewModel : ViewModel() {
 
     fun navigateToSecondScreen(){
         viewModelScope.launch {
-            _events.emit(MainEvents.NavigateToSecondScreen)
+            _events.emit(MainEvents.NavigateToSecondScreen("String from First Screen"))
         }
     }
 }
 
 sealed class MainEvents {
-    data object NavigateToSecondScreen : MainEvents()
+    data class NavigateToSecondScreen(val stringArgument: String) : MainEvents()
 }

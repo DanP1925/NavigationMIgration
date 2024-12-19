@@ -46,15 +46,15 @@ class MainActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mainViewModel.events.collect { event ->
                     when (event) {
-                        MainEvents.NavigateToSecondScreen -> navigateToSecondScreen()
+                        is MainEvents.NavigateToSecondScreen -> navigateToSecondScreen(event.stringArgument)
                     }
                 }
             }
         }
     }
 
-    private fun navigateToSecondScreen() {
-        val action = FirstFragmentDirections.actionFirstToSecond("String from argument")
+    private fun navigateToSecondScreen(valueToPass: String) {
+        val action = FirstFragmentDirections.actionFirstToSecond(valueToPass)
         navController.navigate(action)
     }
 }
