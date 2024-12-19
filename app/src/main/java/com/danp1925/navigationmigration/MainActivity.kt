@@ -54,8 +54,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToSecondScreen() {
-        navController.navigate(R.id.action_first_to_second, Bundle().apply {
-            putString("string_argument", "String from argument")
-        })
+        val action = FirstFragmentDirections.actionFirstToSecond("String from argument")
+        navController.navigate(action)
     }
 }
