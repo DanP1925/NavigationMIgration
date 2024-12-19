@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         toolbar = findViewById(R.id.toolbar)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_nav_host) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_nav_host) as NavHostFragment
         navController = navHostFragment.navController
 
         lifecycleScope.launch {
@@ -42,9 +43,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                mainViewModel.events.collect{ event ->
-                    when(event){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mainViewModel.events.collect { event ->
+                    when (event) {
                         MainEvents.NavigateToSecondScreen -> navigateToSecondScreen()
                     }
                 }
@@ -52,7 +53,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToSecondScreen(){
-        navController.navigate(R.id.action_first_to_second)
+    private fun navigateToSecondScreen() {
+        navController.navigate(R.id.action_first_to_second, Bundle().apply {
+            putString("string_argument", "String from argument")
+        })
     }
 }
