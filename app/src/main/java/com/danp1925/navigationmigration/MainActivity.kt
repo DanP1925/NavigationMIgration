@@ -7,17 +7,18 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModels()
     private lateinit var toolbar: Toolbar
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         toolbar = findViewById(R.id.toolbar)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_nav_host) as NavHostFragment
+        navController = navHostFragment.navController
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -50,10 +53,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToSecondScreen(){
-        supportFragmentManager.commit {
-            replace<SecondFragment>(R.id.fragment_container_view)
-            setReorderingAllowed(true)
-            addToBackStack("first")
-        }
+        navController.navigate(R.id.action_first_to_second)
     }
 }
