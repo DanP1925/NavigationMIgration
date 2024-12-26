@@ -23,10 +23,10 @@ navigation graph.
 There will be 5 branches displaying the migration steps from a navigation with views to a navigation
 with Compose screens
 
-| Syntax                                                               | Description                                                                                                 |
-|----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| [Views](https://github.com/DanP1925/NavigationMigration/tree/views)  | The base project to migrate using views, jetpack navigation, and safeArgs.                                  |
-| Views with KotlinDSL                                                 | Based on the views branch but replacing the XML graph with KotlinDSL                                        |
-| Compose with ViewNav                                                 | The project with the fragments migrated from views to composable Screens but still using jetpack navigation |
-| [Compose](https://github.com/DanP1925/NavigationMigration/tree/main) | Based on the compose with views branch but with Compose navigation                                          |
-| main                                                                 | Based on the compose branch but removing the toolbar from the main activity                                 |
+| Syntax                                                                                          | Description                                                                                                 |
+|-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| [Views](https://github.com/DanP1925/NavigationMigration/tree/views)                             | The base project to migrate using views, jetpack navigation, and safeArgs.                                  |
+| [Views with KotlinDSL](https://github.com/DanP1925/NavigationMigration/tree/viewsWithKotlinDSL) | Based on the views branch but replacing the XML graph with KotlinDSL                                        |
+| Compose with ViewNav                                                                            | The project with the fragments migrated from views to composable Screens but still using jetpack navigation |
+| [Compose](https://github.com/DanP1925/NavigationMigration/tree/main)                            | Based on the compose with views branch but with Compose navigation                                          |
+| main                                                                                            | Based on the compose branch but removing the toolbar from the main activity                                 |
