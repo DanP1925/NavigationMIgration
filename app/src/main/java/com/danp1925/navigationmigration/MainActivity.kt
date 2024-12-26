@@ -11,8 +11,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.createGraph
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.fragment
 import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_nav_host) as NavHostFragment
         navController = navHostFragment.navController
+        navController.graph = makeNavigationGraph()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -55,18 +60,37 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @Serializable
+    data object First
+    @Serializable
+    data class Second(val stringArgument: String)
+    @Serializable
+    data class Third(val numberArgument: Int)
+
+    private fun makeNavigationGraph() = navController.createGraph(
+        startDestination = First
+    ) {
+        fragment<FirstFragment, First>{
+            label = "First"
+        }
+        fragment<SecondFragment, Second>{
+            label = "Second"
+        }
+        fragment<ThirdFragment, Third>{
+            label = "Third"
+        }
+    }
+
+
     private fun navigateToSecondScreen(valueToPass: String) {
-        val action = FirstFragmentDirections.actionFirstToSecond(valueToPass)
-        navController.navigate(action)
+        navController.navigate(route = Second(stringArgument = valueToPass))
     }
 
     private fun navigateFromFirstToThirdScreen() {
-        val action = FirstFragmentDirections.actionFirstToThird(numberArgument = 1)
-        navController.navigate(action)
+        navController.navigate(route = Third(numberArgument = 1))
     }
 
-    private fun navigateFromSecondToThirdScreen(){
-        val action = SecondFragmentDirections.actionSecondToThird(numberArgument = 2)
-        navController.navigate(action)
+    private fun navigateFromSecondToThirdScreen() {
+        navController.navigate(route = Third(numberArgument = 2))
     }
 }
