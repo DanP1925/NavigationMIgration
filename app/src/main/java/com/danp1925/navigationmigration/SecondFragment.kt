@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.toRoute
 
 class SecondFragment : Fragment(R.layout.fragment_second) {
@@ -20,8 +19,8 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         mainViewModel.updateToolbar("Second Screen")
 
         val secondRoute =
-            findNavController().getBackStackEntry<MainActivity.Second>()
-                .toRoute<MainActivity.Second>()
+            findNavController().getBackStackEntry<NavRoutes.Second>()
+                .toRoute<NavRoutes.Second>()
         view.findViewById<TextView>(R.id.second_argument).apply {
             text = secondRoute.stringArgument
         }

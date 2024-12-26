@@ -11,12 +11,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
-import androidx.navigation.createGraph
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.fragment
 import kotlinx.coroutines.launch
-import kotlinx.serialization.Serializable
 
 class MainActivity : AppCompatActivity() {
 
@@ -60,37 +56,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @Serializable
-    data object First
-    @Serializable
-    data class Second(val stringArgument: String)
-    @Serializable
-    data class Third(val numberArgument: Int)
-
-    private fun makeNavigationGraph() = navController.createGraph(
-        startDestination = First
-    ) {
-        fragment<FirstFragment, First>{
-            label = "First"
-        }
-        fragment<SecondFragment, Second>{
-            label = "Second"
-        }
-        fragment<ThirdFragment, Third>{
-            label = "Third"
-        }
-    }
-
+    private fun makeNavigationGraph() = makeMainGraph(navController)
 
     private fun navigateToSecondScreen(valueToPass: String) {
-        navController.navigate(route = Second(stringArgument = valueToPass))
+        navController.navigate(route = NavRoutes.Second(stringArgument = valueToPass))
     }
 
     private fun navigateFromFirstToThirdScreen() {
-        navController.navigate(route = Third(numberArgument = 1))
+        navController.navigate(route = NavRoutes.Third(numberArgument = 1))
     }
 
     private fun navigateFromSecondToThirdScreen() {
-        navController.navigate(route = Third(numberArgument = 2))
+        navController.navigate(route = NavRoutes.Third(numberArgument = 2))
     }
 }

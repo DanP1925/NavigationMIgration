@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.toRoute
 
 class ThirdFragment : Fragment(R.layout.fragment_third) {
@@ -17,8 +16,8 @@ class ThirdFragment : Fragment(R.layout.fragment_third) {
         mainViewModel.updateToolbar("Third Screen")
 
         val thirdRoute =
-            findNavController().getBackStackEntry<MainActivity.Third>()
-                .toRoute<MainActivity.Third>()
+            findNavController().getBackStackEntry<NavRoutes.Third>()
+                .toRoute<NavRoutes.Third>()
         view.findViewById<TextView>(R.id.third_argument).apply {
             text = "Number from previous screen: ${thirdRoute.numberArgument}"
         }
