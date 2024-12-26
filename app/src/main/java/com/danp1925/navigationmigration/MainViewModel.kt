@@ -21,13 +21,20 @@ class MainViewModel : ViewModel() {
         _toolbarTitle.value = newValue
     }
 
-    fun navigateToSecondScreen(){
+    fun navigateToSecondScreen() {
         viewModelScope.launch {
             _events.emit(MainEvents.NavigateToSecondScreen("String from First Screen"))
+        }
+    }
+
+    fun navigateToThirdScreen() {
+        viewModelScope.launch {
+            _events.emit(MainEvents.NavigateToThirdScreen(1))
         }
     }
 }
 
 sealed class MainEvents {
     data class NavigateToSecondScreen(val stringArgument: String) : MainEvents()
+    data class NavigateToThirdScreen(val intArgument: Int) : MainEvents()
 }

@@ -20,6 +20,12 @@
                 app:argType="string" />
         </action>
 
+        <action
+            android:id="@+id/action_first_to_third"
+            app:destination="@id/third_fragment">
+
+        </action>
+
     </fragment>
 
     <fragment
@@ -31,6 +37,18 @@
         <argument
             android:name="string_argument"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/third_fragment"
+        android:name="com.danp1925.navigationmigration.ThirdFragment"
+        android:label="Third"
+        tools:layout="@layout/fragment_third">
+
+        <argument
+            android:name="number_argument"
+            app:argType="integer" />
+
     </fragment>
 
 </navigation>

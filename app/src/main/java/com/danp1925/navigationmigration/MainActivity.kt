@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
                 mainViewModel.events.collect { event ->
                     when (event) {
                         is MainEvents.NavigateToSecondScreen -> navigateToSecondScreen(event.stringArgument)
+                        is MainEvents.NavigateToThirdScreen -> navigateToThirdScreen(event.intArgument)
                     }
                 }
             }
@@ -55,6 +56,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateToSecondScreen(valueToPass: String) {
         val action = FirstFragmentDirections.actionFirstToSecond(valueToPass)
+        navController.navigate(action)
+    }
+
+    private fun navigateToThirdScreen(valueToPass: Int) {
+        val action = FirstFragmentDirections.actionFirstToThird(valueToPass)
         navController.navigate(action)
     }
 }

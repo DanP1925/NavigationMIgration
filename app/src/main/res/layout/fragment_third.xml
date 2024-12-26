@@ -1,44 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/first_title"
+        android:id="@+id/third_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="First\nScreen"
+        android:text="Third\nScreen"
         android:textSize="60sp"
-        app:layout_constraintBottom_toTopOf="@id/navigation_buttons"
+        app:layout_constraintBottom_toTopOf="@id/third_argument"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/navigation_buttons"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/third_argument"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
+        android:layout_marginHorizontal="24dp"
+        android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/first_title">
-
-        <Button
-            android:id="@+id/second_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Go To Second Screen" />
-
-        <Button
-            android:id="@+id/third_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Go To Third Screen" />
-
-    </LinearLayout>
-
+        app:layout_constraintTop_toBottomOf="@id/third_title"
+        tools:text="Number from previous screen: 1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

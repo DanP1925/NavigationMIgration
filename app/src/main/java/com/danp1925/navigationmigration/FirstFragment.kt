@@ -6,10 +6,11 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 
-class FirstFragment : Fragment(R.layout.fragment_first){
+class FirstFragment : Fragment(R.layout.fragment_first) {
 
-    private val mainViewModel : MainViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var secondButton: Button
+    private lateinit var thirdButton: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mainViewModel.updateToolbar("First Screen")
@@ -18,6 +19,12 @@ class FirstFragment : Fragment(R.layout.fragment_first){
         secondButton.setOnClickListener {
             mainViewModel.navigateToSecondScreen()
         }
+
+        thirdButton = view.findViewById(R.id.third_button)
+        thirdButton.setOnClickListener {
+            mainViewModel.navigateToThirdScreen()
+        }
+
     }
 
 }
