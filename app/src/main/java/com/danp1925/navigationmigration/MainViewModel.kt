@@ -27,14 +27,21 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun navigateToThirdScreen() {
+    fun navigateFromFirstToThirdScreen() {
         viewModelScope.launch {
-            _events.emit(MainEvents.NavigateToThirdScreen(1))
+            _events.emit(MainEvents.NavigateFromFirstToThirdScreen)
+        }
+    }
+
+    fun navigateFromSecondToThirdScreen() {
+        viewModelScope.launch {
+            _events.emit(MainEvents.NavigateFromSecondToThirdScreen)
         }
     }
 }
 
 sealed class MainEvents {
     data class NavigateToSecondScreen(val stringArgument: String) : MainEvents()
-    data class NavigateToThirdScreen(val intArgument: Int) : MainEvents()
+    data object NavigateFromFirstToThirdScreen : MainEvents()
+    data object NavigateFromSecondToThirdScreen : MainEvents()
 }

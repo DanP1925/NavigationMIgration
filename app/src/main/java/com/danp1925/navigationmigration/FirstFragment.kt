@@ -22,7 +22,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
 
         thirdButton = view.findViewById(R.id.third_button)
         thirdButton.setOnClickListener {
-            mainViewModel.navigateToThirdScreen()
+            mainViewModel.navigateFromFirstToThirdScreen()
         }
 
     }

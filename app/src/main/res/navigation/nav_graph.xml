@@ -22,9 +22,7 @@
 
         <action
             android:id="@+id/action_first_to_third"
-            app:destination="@id/third_fragment">
-
-        </action>
+            app:destination="@id/third_fragment" />
 
     </fragment>
 
@@ -37,6 +35,11 @@
         <argument
             android:name="string_argument"
             app:argType="string" />
+
+        <action
+            android:id="@+id/action_second_to_third"
+            app:destination="@id/third_fragment" />
+
     </fragment>
 
     <fragment
