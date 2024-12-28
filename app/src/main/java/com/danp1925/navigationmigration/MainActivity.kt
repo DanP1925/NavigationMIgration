@@ -37,18 +37,18 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mainViewModel.toolbarTitle.collect { toolbarTitle ->
-                    toolbar.title = toolbarTitle
+                launch {
+                    mainViewModel.toolbarTitle.collect { toolbarTitle ->
+                        toolbar.title = toolbarTitle
+                    }
                 }
-            }
-        }
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mainViewModel.events.collect { event ->
-                    when (event) {
-                        is MainEvents.NavigateToSecondScreen -> navigateToSecondScreen(event.stringArgument)
-                        is MainEvents.NavigateFromFirstToThirdScreen -> navigateFromFirstToThirdScreen()
-                        is MainEvents.NavigateFromSecondToThirdScreen -> navigateFromSecondToThirdScreen()
+                launch {
+                    mainViewModel.events.collect { event ->
+                        when (event) {
+                            is MainEvents.NavigateToSecondScreen -> navigateToSecondScreen(event.stringArgument)
+                            is MainEvents.NavigateFromFirstToThirdScreen -> navigateFromFirstToThirdScreen()
+                            is MainEvents.NavigateFromSecondToThirdScreen -> navigateFromSecondToThirdScreen()
+                        }
                     }
                 }
             }
