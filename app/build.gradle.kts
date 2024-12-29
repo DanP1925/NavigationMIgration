@@ -49,8 +49,6 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.fragment)
-    implementation(libs.androidx.navigation.ui)
-    implementation(libs.androidx.navigation.fragment)
     implementation(libs.kotlin.serialization)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
