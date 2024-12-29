@@ -5,19 +5,23 @@ import android.widget.Toolbar
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModels()
     private lateinit var toolbar: Toolbar
+    private lateinit var composeView: ComposeView
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,10 +35,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         toolbar = findViewById(R.id.toolbar)
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragment_nav_host) as NavHostFragment
-        navController = navHostFragment.navController
-        navController.graph = makeNavigationGraph()
+        composeView = findViewById(R.id.main_compose_view)
+        composeView.apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool)
+            setContent {
+                MaterialTheme {
+                    val navController = rememberNavController()
+                    makeMainGraph(
+                        navController = navController,
+                        updateToolbar = mainViewModel::updateToolbar
+                    )
+                }
+            }
+        }
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -55,8 +68,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun makeNavigationGraph() = makeMainGraph(navController)
 
     private fun navigateToSecondScreen(valueToPass: String) {
         navController.navigate(route = NavRoutes.Second(stringArgument = valueToPass))

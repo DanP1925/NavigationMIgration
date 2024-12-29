@@ -1,21 +1,29 @@
 package com.danp1925.navigationmigration
 
-import androidx.navigation.NavController
+import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.createGraph
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.fragment.fragment
 
-fun makeMainGraph(navController: NavController) = navController.createGraph(
-    startDestination = NavRoutes.First
-) {
-    addFirstScreen()
-    addSecondScreen()
-    addThirdScreen()
+@Composable
+fun makeMainGraph(navController: NavHostController, updateToolbar: (String) -> Unit) {
+    return NavHost(
+        navController = navController,
+        startDestination = NavRoutes.First
+    ) {
+        addFirstScreen(updateToolbar)
+    }
 }
 
-private fun NavGraphBuilder.addFirstScreen() {
-    fragment<FirstFragment, NavRoutes.First> {
-        label = "First"
+private fun NavGraphBuilder.addFirstScreen(updateToolbar: (String) -> Unit) {
+    composable<NavRoutes.First> {
+        FirstScreen(
+            updateToolbar,
+            {},
+            {}
+        )
     }
 }
 

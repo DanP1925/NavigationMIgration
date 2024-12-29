@@ -10,7 +10,7 @@ material = "1.12.0"
 activity = "1.9.2"
 constraintlayout = "2.1.4"
 fragment = "1.8.5"
-viewNavigation = "2.8.5"
+navigation = "2.8.5"
 coroutinesTest = "1.10.1"
 kotlinSerialization = "1.7.3"
 composeBom = "2024.12.01"
@@ -25,13 +25,14 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
-androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "viewNavigation" }
-androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "viewNavigation" }
+androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigation" }
+androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigation" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
 kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 compose-preview = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-navigation = { group = "androidx.navigation", name="navigation-compose", version.ref= "navigation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

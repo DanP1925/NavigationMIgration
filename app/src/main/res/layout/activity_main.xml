@@ -15,12 +15,10 @@
         android:elevation="4dp"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_nav_host"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/main_compose_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
