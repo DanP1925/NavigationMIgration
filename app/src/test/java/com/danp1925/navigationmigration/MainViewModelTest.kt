@@ -26,37 +26,4 @@ class MainViewModelTest {
         assertEquals(title, sut.toolbarTitle.value)
     }
 
-    @Test
-    fun `WHEN navigateToSecondScreen called THEN send respective event`() = runTest {
-        val events = mutableListOf<MainEvents>()
-        backgroundScope.launch(mainDispatcherRule.testDispatcher) {
-            sut.events.toList(events)
-        }
-        sut.navigateToSecondScreen()
-
-        assertTrue(events.first() is MainEvents.NavigateToSecondScreen)
-    }
-
-    @Test
-    fun `WHEN navigateFromFirstToThirdScreen called THEN send respective event`() = runTest {
-        val events = mutableListOf<MainEvents>()
-        backgroundScope.launch(mainDispatcherRule.testDispatcher) {
-            sut.events.toList(events)
-        }
-        sut.navigateFromFirstToThirdScreen()
-
-        assertTrue(events.first() is MainEvents.NavigateFromFirstToThirdScreen)
-    }
-
-    @Test
-    fun `WHEN navigateFromSecondToThirdScreen called THEN send respective event`() = runTest {
-        val events = mutableListOf<MainEvents>()
-        backgroundScope.launch(mainDispatcherRule.testDispatcher) {
-            sut.events.toList(events)
-        }
-        sut.navigateFromSecondToThirdScreen()
-
-        assertTrue(events.first() is MainEvents.NavigateFromSecondToThirdScreen)
-    }
-
 }
