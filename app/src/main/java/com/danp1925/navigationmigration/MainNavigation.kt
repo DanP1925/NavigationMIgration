@@ -5,7 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.fragment.fragment
+import androidx.navigation.toRoute
 
 @Composable
 fun makeMainGraph(navController: NavHostController, updateToolbar: (String) -> Unit) {
@@ -13,28 +13,57 @@ fun makeMainGraph(navController: NavHostController, updateToolbar: (String) -> U
         navController = navController,
         startDestination = NavRoutes.First
     ) {
-        addFirstScreen(updateToolbar)
+        addFirstScreen(navController, updateToolbar)
+        addSecondScreen(navController, updateToolbar)
+        addThirdScreen(updateToolbar)
     }
 }
 
-private fun NavGraphBuilder.addFirstScreen(updateToolbar: (String) -> Unit) {
+private fun NavGraphBuilder.addFirstScreen(
+    navController: NavHostController,
+    updateToolbar: (String) -> Unit
+) {
     composable<NavRoutes.First> {
         FirstScreen(
-            updateToolbar,
-            {},
-            {}
+            updateToolbar = updateToolbar,
+            navigateToSecondScreen = {
+                navController.navigate(
+                    NavRoutes.Second(stringArgument = "String from First Screen")
+                )
+            },
+            navigateToThirdScreen = {
+                navController.navigate(
+                    NavRoutes.Third(numberArgument = 1)
+                )
+            }
         )
     }
 }
 
-private fun NavGraphBuilder.addSecondScreen() {
-    fragment<SecondFragment, NavRoutes.Second> {
-        label = "Second"
+private fun NavGraphBuilder.addSecondScreen(
+    navController: NavHostController,
+    updateToolbar: (String) -> Unit
+) {
+    composable<NavRoutes.Second> { backStackEntry ->
+        val secondRoute: NavRoutes.Second = backStackEntry.toRoute()
+        SecondScreen(
+            stringArgument = secondRoute.stringArgument,
+            updateToolbar = updateToolbar,
+            navigateToThirdScreen = {
+                navController.navigate(
+                    NavRoutes.Third(numberArgument = 2)
+                )
+            }
+        )
     }
 }
 
-private fun NavGraphBuilder.addThirdScreen() {
-    fragment<ThirdFragment, NavRoutes.Third> {
-        label = "Third"
+private fun NavGraphBuilder.addThirdScreen(updateToolbar: (String) -> Unit) {
+    composable<NavRoutes.Third> { backStackEntry ->
+        val thirdRoute: NavRoutes.Third = backStackEntry.toRoute()
+        ThirdScreen(
+            numberArgument = thirdRoute.numberArgument,
+            updateToolbar = updateToolbar
+        )
     }
 }

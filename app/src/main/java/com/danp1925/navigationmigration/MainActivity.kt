@@ -56,28 +56,8 @@ class MainActivity : AppCompatActivity() {
                         toolbar.title = toolbarTitle
                     }
                 }
-                launch {
-                    mainViewModel.events.collect { event ->
-                        when (event) {
-                            is MainEvents.NavigateToSecondScreen -> navigateToSecondScreen(event.stringArgument)
-                            is MainEvents.NavigateFromFirstToThirdScreen -> navigateFromFirstToThirdScreen()
-                            is MainEvents.NavigateFromSecondToThirdScreen -> navigateFromSecondToThirdScreen()
-                        }
-                    }
-                }
             }
         }
     }
 
-    private fun navigateToSecondScreen(valueToPass: String) {
-        navController.navigate(route = NavRoutes.Second(stringArgument = valueToPass))
-    }
-
-    private fun navigateFromFirstToThirdScreen() {
-        navController.navigate(route = NavRoutes.Third(numberArgument = 1))
-    }
-
-    private fun navigateFromSecondToThirdScreen() {
-        navController.navigate(route = NavRoutes.Third(numberArgument = 2))
-    }
 }
